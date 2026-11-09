@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="1.8">
+      <module name="Markhor.app" target="21" />
+      <module name="Markhor.buildSrc" target="21" />
+      <module name="Markhor.buildSrc.main" target="21" />
+      <module name="Markhor.buildSrc.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
