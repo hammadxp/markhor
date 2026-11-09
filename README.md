@@ -36,6 +36,10 @@ Open the project in Android Studio, or build from the command line:
 
 For most devices, install the **arm64-v8a** APK.
 
+## 💖 Support
+
+Markhor is free and open source. If you find it useful, you can support its development on [Patreon](https://patreon.com/hammadxp). Supporters are listed in the app under **Settings > About > Sponsor**.
+
 ## 🧱 Credits
 
 Markhor is based on [Seal](https://github.com/JunkFood02/Seal), a GUI for [yt-dlp](https://github.com/yt-dlp/yt-dlp) built on [youtubedl-android](https://github.com/yausername/youtubedl-android).

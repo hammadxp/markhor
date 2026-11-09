@@ -2,26 +2,13 @@ package com.hammadxp.markhor.util
 
 import kotlinx.serialization.Serializable
 
-@Serializable data class SponsorData(val data: Data)
-
-@Serializable data class Data(val viewer: Viewer)
-
-@Serializable data class Viewer(val sponsorshipsAsMaintainer: SponsorshipsAsMaintainer)
-
-@Serializable data class SponsorshipsAsMaintainer(val nodes: List<SponsorShip>)
-
+/**
+ * Shape of `sponsors.json` at the repository root, written by `.github/scripts/sync_patreon_sponsors.py`.
+ *
+ * Example: `{ "current": [{ "name": "Jane", "url": "https://www.patreon.com/jane", "avatar": "https://..." }],
+ * "past": [] }`
+ */
 @Serializable
-data class SponsorEntity(
-    val login: String,
-    val name: String? = null,
-    val websiteUrl: String? = null,
-    val socialAccounts: SocialAccounts? = null,
-)
+data class SponsorList(val current: List<Sponsor> = emptyList(), val past: List<Sponsor> = emptyList())
 
-@Serializable data class Tier(val monthlyPriceInDollars: Int)
-
-@Serializable data class SponsorShip(val sponsorEntity: SponsorEntity, val tier: Tier? = null)
-
-@Serializable data class SocialAccounts(val nodes: List<SocialAccount>? = null)
-
-@Serializable data class SocialAccount(val displayName: String?, val url: String?)
+@Serializable data class Sponsor(val name: String, val url: String? = null, val avatar: String? = null)

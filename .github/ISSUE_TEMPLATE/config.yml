@@ -1,2 +1,6 @@
 # disable blank issue creation
 blank_issues_enabled: false
+contact_links:
+  - name: Email the developer
+    url: mailto:hammadjaved9860@gmail.com
+    about: For questions that are not bug reports or feature requests.

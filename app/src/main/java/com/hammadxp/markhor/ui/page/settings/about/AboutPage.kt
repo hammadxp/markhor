@@ -66,7 +66,6 @@ const val githubIssueUrl = "$repoUrl/issues"
 private const val developerGithubUrl = "https://github.com/hammadxp"
 private const val developerXUrl = "https://x.com/hammadxp_"
 private const val developerEmail = "hammadjaved9860@gmail.com"
-private const val githubSponsor = "https://github.com/sponsors/JunkFood02"
 private const val TAG = "AboutPage"
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -156,7 +155,6 @@ fun AboutPage(
                         description = stringResource(id = R.string.sponsor_desc),
                         icon = Icons.Outlined.VolunteerActivism,
                     ) {
-                        //                    openUrl(githubSponsor)
                         onNavigateToDonatePage()
                     }
                 }

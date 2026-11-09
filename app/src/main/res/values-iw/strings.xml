@@ -144,7 +144,6 @@
     <string name="show_logs">הצג יומן</string>
     <string name="logs">לוג</string>
     <string name="edit_shortcuts_desc">ערוך את הקיצורים המותאמים אישית שניתן להשתמש בהם כדי ליצור תבניות פקודות.</string>
-    <string name="sponsor_msg">Markhor יהיה תמיד קוד פתוח ובחינם לכולם. אם אתה אוהב את זה, בבקשה שקול לתת לי חסות ב-GitHub!</string>
     <string name="clear_all_cookies_desc">האם למחוק לצמיתות את כל העוגיות המאוחסנות באפליקציה?</string>
     <string name="clip_video_desc">צור קטעי וידאו בדף בחירת הפורמט</string>
     <string name="proxy">פרוקסי</string>
@@ -261,7 +260,6 @@
 \n
 \nתיתכן חוסר יציבות בגרסאות אלה, אז אנא אל תהסס לשלוח לנו משוב אם אתה נתקל בבעיות כלשהן, כדי לעזור לנו לשפר את האפליקציה בעתיד.</string>
     <string name="auto_update">עדכון אוטומטי</string>
-    <string name="sponsor_desc">תמכו באפליקציה זו על ידי מתן חסות ב-GitHub</string>
     <string name="subtitle">כתוביות</string>
     <string name="clip_video">חיתוך וידאו</string>
     <string name="clip_start">התחלה</string>

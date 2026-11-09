@@ -290,10 +290,12 @@
     <string name="clear_all_cookies_desc">Delete all the cookies stored in the app for good?</string>
     <string name="temporary_directory_desc">Store temporary files in the internal directory</string>
     <string name="sponsor">Sponsor</string>
-    <string name="sponsor_desc">Support this app by sponsoring on GitHub</string>
-    <string name="sponsor_msg">Markhor will be always free and open source for everyone. If you like it, please consider sponsoring me on GitHub!</string>
+    <string name="sponsor_desc">Support this app on Patreon</string>
+    <string name="sponsor_msg">Markhor will always be free and open source for everyone. If you like it, please consider supporting me on Patreon!</string>
     <string name="feedback">Feedback</string>
     <string name="sponsors">Sponsors</string>
+    <string name="current_sponsors">Current sponsors</string>
+    <string name="past_sponsors">Past sponsors</string>
     <string name="audio_format">Audio format</string>
     <string name="no_downloaded_media">No downloaded media</string>
     <string name="beta_features">Beta</string>

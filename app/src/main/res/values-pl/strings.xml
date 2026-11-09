@@ -247,7 +247,6 @@
     <string name="sponsorblock_desc">Usuń lub oznacz segmenty filmów za pomocą API SponsorBlock</string>
     <string name="dynamic_color_desc">Zastosuj kolory z tapety do motywu aplikacji</string>
     <string name="sponsor">Sponsor</string>
-    <string name="sponsor_desc">Wesprzyj aplikację poprzez wsparcie na GitHub</string>
     <string name="download_with_cellular">Pobierz przy pomocy sieci komórkowej</string>
     <string name="network">Sieć</string>
     <string name="rate_limit">Ograniczenie prędkości</string>
@@ -279,7 +278,6 @@
     <string name="running_tasks">Uruchomione zadania</string>
     <string name="show_logs">Pokaż logi</string>
     <string name="sponsors">Sponsorzy</string>
-    <string name="sponsor_msg">Markhor zawsze będzie darmowy i z otwartym kodem źródłowym. Jeśli Ci się spodoba, rozważ wsparcie mnie na GitHub!</string>
     <string name="feedback">Informacja zwrotna</string>
     <string name="subtitle_sponsorblock">Podczas usuwania segmentów SponsorBlock napisy mogą wyświetlać się w niewłaściwym czasie.</string>
     <string name="filesize_mb">%.2f MB</string>

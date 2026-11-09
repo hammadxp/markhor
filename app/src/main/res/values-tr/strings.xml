@@ -282,8 +282,6 @@
     <string name="clear_all_cookies_desc">Uygulamada saklanan tüm çerezler kalıcı olarak silinsin mi\?</string>
     <string name="temporary_directory_desc">Geçici dosyaları dahili dizinde saklayın</string>
     <string name="sponsor">Sponsor</string>
-    <string name="sponsor_desc">GitHub\'da sponsor olarak bu uygulamayı destekleyin</string>
-    <string name="sponsor_msg">Markhor her zaman ücretsiz ve herkes için açık kaynak olacaktır. Beğendiyseniz, lütfen GitHub\'da bana sponsor olmayı düşünün!</string>
     <string name="feedback">Geri bildirim</string>
     <string name="sponsors">Sponsorlar</string>
     <string name="msg_from_developer">Geliştiriciden Mesaj</string>

@@ -179,7 +179,6 @@
     <string name="filesize_gb">%.2f G</string>
     <string name="apply">Aplică</string>
     <string name="unlimited">Nelimitat</string>
-    <string name="sponsor_msg">Markhor va fi întotdeauna gratuit și open source pentru toată lumea. Dacă îți place, te rog să mă sponsorizezi pe GitHub!</string>
     <string name="convert_audio_format_desc">Recodificarea fișierelor audio va duce la pierderea calității audio și la creșterea dimensiunii fișierului.</string>
     <string name="clip_video">Clipează video</string>
     <string name="convert_audio_format">Convertiți formatul audio</string>
@@ -278,7 +277,6 @@
     <string name="clear_all_cookies">Ștergeți toate cookie-urile</string>
     <string name="clear_all_cookies_desc">Ștergeți definitiv toate cookie-urile stocate în aplicație\?</string>
     <string name="sponsor">Sponsor</string>
-    <string name="sponsor_desc">Sprijină această aplicație prin sponsorizare pe GitHub</string>
     <string name="feedback">Părere</string>
     <string name="sponsors">Sponsori</string>
     <string name="temporary_directory_desc">Stocați fișierele temporare în directorul intern</string>

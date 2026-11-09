@@ -275,12 +275,10 @@
     <string name="embed_subtitles_mkv_msg">Upang mag-embed ng soft subtitles, ang mga video ay ire-remux sa mkv container. Maaaring gamitin ang VLC Media Player o iba pang compatible na app para manood ng mga video na may soft subtitles.</string>
     <string name="audio_format_preference">Piniling format ng audio</string>
     <string name="format_sorting">Pag-uuri ng format</string>
-    <string name="sponsor_desc">Suportahan ang app na ito sa pamamagitan ng pag-sponsor sa GitHub</string>
     <string name="feedback">Puna</string>
     <string name="sponsors">Mga sponsor</string>
     <string name="clip_video_desc">Gumawa ng mga video clip sa pahina ng pagpili ng format</string>
     <string name="add">Idagdag</string>
-    <string name="sponsor_msg">Ang Markhor ay palaging libre at open source para sa lahat. Kung gusto mo ito, mangyaring isaalang-alang ang pag-sponsor sa akin sa GitHub!</string>
     <string name="subtitle_desc">Mga wika, mag-embed ng mga subtitle, at auto captions</string>
     <string name="stable_channel">Matibay</string>
     <string name="update_channel">I-update ang channel</string>

@@ -276,8 +276,6 @@
     <string name="clear_all_cookies_desc">¿Borrar definitivamente todas las cookies almacenadas en la aplicación\?</string>
     <string name="temporary_directory_desc">Almacena archivos temporales en el directorio seleccionado</string>
     <string name="sponsor">Patrocinador</string>
-    <string name="sponsor_desc">Apoya esta aplicación patrocinando en GitHub</string>
-    <string name="sponsor_msg">Markhor será siempre gratuito y de código abierto para todos. Si te gusta, ¡considera la posibilidad de patrocinarme en GitHub!</string>
     <string name="feedback">Comentario</string>
     <string name="sponsors">Patrocinadores</string>
     <string name="audio_format">Formato del audio</string>
