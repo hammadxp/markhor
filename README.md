@@ -38,7 +38,13 @@ For most devices, install the **arm64-v8a** APK.
 
 ## 💖 Support
 
-Markhor is free and open source. If you find it useful, you can support its development on [Patreon](https://patreon.com/hammadxp). Supporters are listed in the app under **Settings > About > Sponsor**.
+[![Support me on Patreon](https://img.shields.io/badge/Patreon-Support%20Markhor-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://patreon.com/hammadxp)
+
+Markhor is free and open source. If you find it useful, you can support its development on [Patreon](https://patreon.com/hammadxp). Supporters are listed below and in the app under **Settings > About > Sponsor**.
+
+<!-- sponsors:start -->
+No supporters yet. [Be the first!](https://patreon.com/hammadxp)
+<!-- sponsors:end -->
 
 ## 🧱 Credits
 

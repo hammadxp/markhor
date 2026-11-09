@@ -6,6 +6,7 @@ switched to another tier), most recently left first.
 
 Patreon only reports the tier a patron is entitled to right now, so a former patron's old tier
 is unknown. That is why "past" is built from the previous sponsors.json instead of the API alone.
+Also rewrites the block between the sponsor markers in README.md with avatar rows.
 Needs PATREON_ACCESS_TOKEN (the creator's access token).
 
 Output example:
@@ -13,6 +14,7 @@ Output example:
    "past": []}
 """
 
+import html
 import json
 import os
 import sys
@@ -21,6 +23,13 @@ import urllib.request
 
 API = "https://www.patreon.com/api/oauth2/v2"
 OUTPUT_FILE = "sponsors.json"
+README_FILE = "README.md"
+README_START = "<!-- sponsors:start -->"
+README_END = "<!-- sponsors:end -->"
+PATREON_URL = "https://patreon.com/hammadxp"
+AVATAR_SIZE = 48
+# Shown for patrons without a Patreon picture.
+DEFAULT_AVATAR = "https://github.com/identicons/markhor.png"
 
 # INFO: Matched by title, so renaming the tier on Patreon also needs a change here.
 TIER_TITLE = "Markhor supporter"
@@ -130,11 +139,51 @@ def main() -> None:
         past.append(latest.get(sid, sponsor))
 
     # Dates stay out of sponsors.json, which is public.
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as file:
+    with open(OUTPUT_FILE, "w", encoding="utf-8", newline="\n") as file:
         json.dump({"current": current, "past": past}, file, ensure_ascii=False, indent=2)
         file.write("\n")
 
+    update_readme(current, past)
     print(f'Wrote {len(current)} current and {len(past)} past "{TIER_TITLE}" sponsors to {OUTPUT_FILE}.')
+
+
+def sponsor_avatar_html(sponsor: dict) -> str:
+    name = html.escape(sponsor["name"], quote=True)
+    avatar = html.escape(sponsor.get("avatar") or DEFAULT_AVATAR, quote=True)
+    image = f'<img src="{avatar}" width="{AVATAR_SIZE}" height="{AVATAR_SIZE}" alt="{name}" title="{name}" />'
+    if sponsor.get("url"):
+        return f'<a href="{html.escape(sponsor["url"], quote=True)}">{image}</a>'
+    return image
+
+
+def update_readme(current: list[dict], past: list[dict]) -> None:
+    """Rewrites the README block between the sponsor markers with avatar rows."""
+    try:
+        with open(README_FILE, encoding="utf-8", newline="") as file:
+            readme = file.read()
+    except FileNotFoundError:
+        return
+
+    start, end = readme.find(README_START), readme.find(README_END)
+    if start == -1 or end == -1 or end < start:
+        print(f"Sponsor markers not found in {README_FILE}, skipping it.")
+        return
+
+    if current or past:
+        sections = []
+        if current:
+            avatars = " ".join(sponsor_avatar_html(s) for s in current)
+            sections.append(f"**Current supporters ({len(current)})**\n\n{avatars}")
+        if past:
+            avatars = " ".join(sponsor_avatar_html(s) for s in past)
+            sections.append(f"**Past supporters ({len(past)})**\n\n{avatars}")
+        block = "\n\n".join(sections)
+    else:
+        block = f"No supporters yet. [Be the first!]({PATREON_URL})"
+
+    readme = readme[: start + len(README_START)] + f"\n{block}\n" + readme[end:]
+    with open(README_FILE, "w", encoding="utf-8", newline="") as file:
+        file.write(readme)
 
 
 if __name__ == "__main__":
