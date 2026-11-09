@@ -18,3 +18,4 @@ local.properties
 /keystore.properties
 .kotlin__pycache__/
 *.pyc
+/app/release.jks

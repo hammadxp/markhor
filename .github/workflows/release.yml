@@ -1,0 +1,90 @@
+name: Release
+
+# Run from the Actions tab. Works out the next version from git tags and commit messages,
+# builds signed APKs with that version, then creates the git tag and GitHub release.
+# The in-app updater reads these releases, so the release title must stay "v<version>".
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump (auto reads commit messages: feat = minor, feat! = major, else patch)"
+        type: choice
+        options: [auto, patch, minor, major]
+        default: auto
+      channel:
+        description: "stable for everyone, beta for users on the preview update channel"
+        type: choice
+        options: [stable, beta]
+        default: stable
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # all tags and commits, for working out the next version
+
+      - name: Work out next version
+        id: version
+        run: |
+          version=$(bash .github/scripts/next_version.sh "${{ inputs.bump }}" "${{ inputs.channel }}")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Next version: v$version" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Set up signing key
+        env:
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          ALIAS: ${{ secrets.ALIAS }}
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          if [[ -z "$SIGNING_KEY" || -z "$ALIAS" || -z "$KEY_STORE_PASSWORD" || -z "$KEY_PASSWORD" ]]; then
+            echo "::error::Add the SIGNING_KEY, ALIAS, KEY_STORE_PASSWORD and KEY_PASSWORD repository secrets first."
+            exit 1
+          fi
+          echo "$SIGNING_KEY" | base64 --decode > app/release.jks
+          {
+            echo "storeFile=release.jks"
+            echo "storePassword=$KEY_STORE_PASSWORD"
+            echo "keyAlias=$ALIAS"
+            echo "keyPassword=$KEY_PASSWORD"
+          } > keystore.properties
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: temurin
+
+      - uses: android-actions/setup-android@v3
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build signed APKs
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleGenericRelease -PappVersion=${{ steps.version.outputs.version }}
+
+      - name: Create tag and GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          flags=()
+          if [[ "${{ inputs.channel }}" == "beta" ]]; then flags+=(--prerelease); fi
+          gh release create "v$VERSION" app/build/outputs/apk/generic/release/*.apk \
+            --title "v$VERSION" \
+            --target "$GITHUB_SHA" \
+            --generate-notes \
+            "${flags[@]}"
+
+      - name: Remove signing files
+        if: always()
+        run: rm -f app/release.jks keystore.properties

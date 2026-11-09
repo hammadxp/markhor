@@ -22,6 +22,22 @@ val abiFilterList = (properties["ABI_FILTERS"] as String).split(';')
 
 val abiCodes = mapOf("armeabi-v7a" to 1, "arm64-v8a" to 2, "x86" to 3, "x86_64" to 4)
 
+// INFO: The version comes from -PappVersion (set by the release workflow), else the latest
+// "v*" git tag, else FALLBACK_VERSION. Example: tag v1.2.3 -> versionName 1.2.3, versionCode 102030400.
+val latestGitTag: String? =
+    providers
+        .exec {
+            commandLine("git", "describe", "--tags", "--abbrev=0", "--match", "v[0-9]*")
+            isIgnoreExitValue = true
+        }
+        .standardOutput
+        .asText
+        .get()
+        .trim()
+        .ifEmpty { null }
+
+val currentVersion: Version =
+    parseVersion(providers.gradleProperty("appVersion").orNull ?: latestGitTag ?: FALLBACK_VERSION)
 val baseVersionName = currentVersion.name
 val currentVersionCode = currentVersion.code.toInt()
 
@@ -47,8 +63,7 @@ android {
         applicationId = "com.hammadxp.markhor"
         minSdk = 24
         targetSdk = 35
-        versionCode = 200_000_150
-        check(versionCode == currentVersionCode)
+        versionCode = currentVersionCode
 
         versionName = baseVersionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

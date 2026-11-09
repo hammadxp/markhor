@@ -36,6 +36,15 @@ Open the project in Android Studio, or build from the command line:
 
 For most devices, install the **arm64-v8a** APK.
 
+## 🚀 Releasing
+
+Versions are never edited by hand. Run the **Release** workflow from the Actions tab and it:
+
+1. Works out the next version from the last `v*` tag and the commit messages since then: `feat!:` or `BREAKING CHANGE` bumps major, `feat:` bumps minor, anything else bumps patch. You can also force patch, minor or major.
+2. Builds signed APKs with that version and publishes them as a GitHub release, which the in-app updater picks up.
+
+Pick the **beta** channel to publish a pre-release (for example `v1.1.0-beta.1`) that only reaches users on the preview update channel. The workflow needs the `SIGNING_KEY` (base64 keystore), `ALIAS`, `KEY_STORE_PASSWORD` and `KEY_PASSWORD` repository secrets.
+
 ## 💖 Support
 
 [![Support me on Patreon](https://img.shields.io/badge/Patreon-Support%20Markhor-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://patreon.com/hammadxp)

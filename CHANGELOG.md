@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > [!Note]
 >
-> Markhor is a fork of [Seal](https://github.com/JunkFood02/Seal). The entries below, up to v2.0.0, are Seal's release history and link to Seal's releases.
+> Markhor is a fork of [Seal](https://github.com/JunkFood02/Seal). Markhor's own versions start at v1.0.0, with release notes on [GitHub Releases](https://github.com/hammadxp/markhor/releases). The entries below are Seal's release history and link to Seal's releases.
 
 ## [v2.0.0][2.0.0] - unreleased
 
