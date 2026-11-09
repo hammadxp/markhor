@@ -16,4 +16,5 @@
 .cxx
 local.properties
 /keystore.properties
-.kotlin
+.kotlin__pycache__/
+*.pyc
