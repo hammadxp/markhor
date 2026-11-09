@@ -1,7 +1,8 @@
 name: Release
 
 # Run from the Actions tab. Works out the next version from git tags and commit messages,
-# builds signed APKs with that version, then creates the git tag and GitHub release.
+# builds signed APKs with that version, adds a CHANGELOG.md entry (git-cliff), then creates
+# the git tag and GitHub release with the same notes.
 # The in-app updater reads these releases, so the release title must stay "v<version>".
 on:
   workflow_dispatch:
@@ -16,6 +17,10 @@ on:
         type: choice
         options: [stable, beta]
         default: stable
+      notes:
+        description: "Optional notes shown above the commit list (summary, known issues). Markdown works."
+        type: string
+        required: false
 
 permissions:
   contents: write
@@ -72,6 +77,27 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleGenericRelease -PappVersion=${{ steps.version.outputs.version }}
 
+      # Ubuntu's system Python refuses pip installs, so git-cliff gets its own Python.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Update CHANGELOG.md
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          RELEASE_NOTES: ${{ inputs.notes }}
+        run: |
+          pip install --quiet git-cliff==2.14.2
+          git-cliff --config cliff.toml --unreleased --tag "v$VERSION" --output "$RUNNER_TEMP/section.md"
+          python .github/scripts/update_changelog.py "$RUNNER_TEMP/section.md" "$RUNNER_TEMP/release-notes.md"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "chore(release): v$VERSION"
+          git push
+
+      # INFO: The tag points at the changelog commit, so each release includes its own entry.
       - name: Create tag and GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -81,8 +107,8 @@ jobs:
           if [[ "${{ inputs.channel }}" == "beta" ]]; then flags+=(--prerelease); fi
           gh release create "v$VERSION" app/build/outputs/apk/generic/release/*.apk \
             --title "v$VERSION" \
-            --target "$GITHUB_SHA" \
-            --generate-notes \
+            --target "$(git rev-parse HEAD)" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" \
             "${flags[@]}"
 
       - name: Remove signing files

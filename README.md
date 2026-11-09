@@ -42,6 +42,7 @@ Versions are never edited by hand. Run the **Release** workflow from the Actions
 
 1. Works out the next version from the last `v*` tag and the commit messages since then: `feat!:` or `BREAKING CHANGE` bumps major, `feat:` bumps minor, anything else bumps patch. You can also force patch, minor or major.
 2. Builds signed APKs with that version and publishes them as a GitHub release, which the in-app updater picks up.
+3. Adds the release to [CHANGELOG.md](CHANGELOG.md) with [git-cliff](https://git-cliff.org): `feat` commits go under **Added**, `fix` under **Fixed**, `perf`/`refactor`/`style` under **Changed**, and `docs`/`chore`/`ci`/`test` are left out. Anything you type in the optional **notes** box (a summary, known issues) appears above the list. The release page gets the same text.
 
 Pick the **beta** channel to publish a pre-release (for example `v1.1.0-beta.1`) that only reaches users on the preview update channel. The workflow needs the `SIGNING_KEY` (base64 keystore), `ALIAS`, `KEY_STORE_PASSWORD` and `KEY_PASSWORD` repository secrets.
 
